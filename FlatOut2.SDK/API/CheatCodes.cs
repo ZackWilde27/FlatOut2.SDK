@@ -48,7 +48,7 @@ public static unsafe class CheatCodeManager
     /// <param name="profile">The profile to apply the cheat to</param>
     private static void ExampleCheatCode(PlayerProfile* profile)
     {
-        profile->Money = 27272727;
+        profile->Money = 272727;
     }
 
     /// <summary>
