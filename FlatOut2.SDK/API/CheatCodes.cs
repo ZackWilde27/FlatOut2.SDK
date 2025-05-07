@@ -6,7 +6,7 @@ using static FlatOut2.SDK.Functions.CheatCodeFuncs;
 namespace FlatOut2.SDK.API;
 
 /// <summary>
-/// Handles hooking and storing the cheat codes for the API
+/// Handles hooking, storing, and checking for custom cheat codes
 /// </summary>
 public static unsafe class CheatCodeManager
 {
@@ -43,19 +43,6 @@ public static unsafe class CheatCodeManager
     }
 
     /// <summary>
-    /// Adds a new cheat code. Automatically hooks if this is the first call
-    /// </summary>
-    /// <param name="code">The new code to check for. Should be all caps given the on-screen keyboard's limitations</param>
-    /// <param name="activationFunction">The function to call when the cheat is entered</param>
-    public static void Add(string code, CheatCodeCallback activationFunction)
-    {
-        if (CheatCodeHook == null)
-            Hook(SDK.ReloadedHooks);
-
-        NewCheats.Add(new(code, activationFunction));
-    }
-
-    /// <summary>
     /// An example of a cheat code callback
     /// </summary>
     /// <param name="profile">The profile to apply the cheat to</param>
@@ -65,34 +52,40 @@ public static unsafe class CheatCodeManager
     }
 
     /// <summary>
-    /// Hooks the game's cheat code check
+    /// Adds a new cheat code. Automatically hooks if this is the first call
     /// </summary>
-    /// <param name="hooks">IReloadedHooks reference needed to call CreateHook</param>
-    public static void Hook(IReloadedHooks hooks)
+    /// <param name="code">The new code to check for. Should be all caps given the on-screen keyboard's limitations</param>
+    /// <param name="activationFunction">The function to call when the cheat is entered. It takes a PlayerProfile* parameter and returns void</param>
+    public static void Add(string code, CheatCodeCallback activationFunction)
     {
-        CheatCodeHook = hooks.CreateHook<CheckForCheatCodesPtr>(NewCheckForCheatCodes, 0x00476570).Activate();
-        Add("ZACK", ExampleCheatCode);
+        if (CheatCodeHook == null)
+        {
+            CheatCodeHook = SDK.ReloadedHooks.CreateHook<CheckForCheatCodesPtr>(NewCheckForCheatCodes, 0x00476570).Activate();
+            Add("ZACK", ExampleCheatCode);
+        }
+
+        NewCheats.Add(new(code, activationFunction));
     }
+}
+
+/// <summary>
+/// Struct for storing both the code and callback together
+/// </summary>
+struct NewCheatCode
+{
+    /// <summary>
+    /// The code to check for
+    /// </summary>
+    public string Code;
 
     /// <summary>
-    /// Struct for storing both the code and callback together
+    /// The function to call when the code is entered
     /// </summary>
-    private struct NewCheatCode
+    public CheatCodeCallback OnActivation;
+
+    public NewCheatCode(string code, CheatCodeCallback activationFunction)
     {
-        /// <summary>
-        /// The code to check for
-        /// </summary>
-        public string Code;
-
-        /// <summary>
-        /// The function to call when the code is entered
-        /// </summary>
-        public CheatCodeCallback OnActivation;
-
-        public NewCheatCode(string code, CheatCodeCallback activationFunction)
-        {
-            Code = code;
-            OnActivation = activationFunction;
-        }
+        Code = code;
+        OnActivation = activationFunction;
     }
 }
