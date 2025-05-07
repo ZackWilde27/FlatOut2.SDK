@@ -20,19 +20,11 @@ public static class SDK
     public static IReloadedHooks ReloadedHooks { get; private set; } = null!;
 
     /// <summary>
-    /// The cheat code manager.
-    /// Call CheatCodes.Hook() at the start before using CheatCodes.Add()
-    /// </summary>
-    public static CheatCodeManager CheatCodes { get; private set; } = null!;
-
-    /// <summary>
     /// Initializes the Riders SDK as a Reloaded II mod, setting the shared library to be used.
     /// </summary>
     public static void Init(IReloadedHooks hooks)
     {
         ReloadedHooks = hooks;
-
-        CheatCodes = new();
 
         var mainModule = Process.GetCurrentProcess().MainModule;
         if (mainModule != null)
