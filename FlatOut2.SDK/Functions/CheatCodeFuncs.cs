@@ -14,8 +14,8 @@ public static unsafe class CheatCodeFuncs
     /// Internal definition for hooking the game's check
     /// </summary>
     /// <param name="codePtr">The pointer to the entered code</param>
-    /// <param name="profile">The profile to apply the cheat to</param>
-    /// <returns>1 if the cheat was valid, 0 if not</returns>
+    /// <param name="profile">Pointer to the current profile</param>
+    /// <returns>1 if the cheat was valid, otherwise 0</returns>
     [Function(new Register[] { Register.ebx, Register.esi }, Register.eax, StackCleanup.Callee)]
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate int CheckForCheatCodesPtr(char* codePtr, PlayerProfile* profile);
@@ -23,6 +23,6 @@ public static unsafe class CheatCodeFuncs
     /// <summary>
     /// The callback function for activating a custom cheat code
     /// </summary>
-    /// <param name="profile">The profile to apply the cheat to</param>
+    /// <param name="profile">Pointer to the current profile</param>
     public delegate void CheatCodeCallback(PlayerProfile* profile);
 }

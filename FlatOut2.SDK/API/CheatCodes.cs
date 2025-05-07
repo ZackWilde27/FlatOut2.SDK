@@ -6,7 +6,7 @@ using static FlatOut2.SDK.Functions.CheatCodeFuncs;
 namespace FlatOut2.SDK.API;
 
 /// <summary>
-/// Handles hooking, storing, and checking for custom cheat codes
+/// Handles hooking the cheat code check, as well as adding and checking for custom cheat codes
 /// </summary>
 public static unsafe class CheatCodeManager
 {
@@ -24,8 +24,8 @@ public static unsafe class CheatCodeManager
     /// The replacement function for checking cheat codes
     /// </summary>
     /// <param name="codePtr">The pointer to the entered code</param>
-    /// <param name="profile">The profile to apply the cheat to</param>
-    /// <returns>1 if the cheat was valid, 0 if not</returns>
+    /// <param name="profile">Pointer to the current profile</param>
+    /// <returns>1 if the cheat was valid, otherwise 0</returns>
     private static int NewCheckForCheatCodes(char* codePtr, PlayerProfile* profile)
     {
         string code = Marshal.PtrToStringUni((nint)codePtr)!;
@@ -45,7 +45,7 @@ public static unsafe class CheatCodeManager
     /// <summary>
     /// An example of a cheat code callback
     /// </summary>
-    /// <param name="profile">The profile to apply the cheat to</param>
+    /// <param name="profile">Points at the current PlayerProfile</param>
     private static void ExampleCheatCode(PlayerProfile* profile)
     {
         profile->Money = 272727;

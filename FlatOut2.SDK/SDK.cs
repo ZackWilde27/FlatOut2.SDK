@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using FlatOut2.SDK.API;
 using Reloaded.Hooks.Definitions;
 using Reloaded.Memory;
 using Reloaded.Memory.Enums;
