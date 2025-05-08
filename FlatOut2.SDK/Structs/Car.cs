@@ -33,24 +33,24 @@ public unsafe struct Car
     /// <summary>
     /// The current level of nitro, from 0-5
     /// </summary>
-    [FieldOffset(0x5cc)]
+    [FieldOffset(0x5CC)]
     public float Nitro;
 
     /// <summary>
     /// 1 if ragdolled, otherwise 0
     /// </summary>
-    [FieldOffset(0x2ab0)]
+    [FieldOffset(0x2AB0)]
     public int RagdollState;
 
     /// <summary>
-    /// Determines things like who's portrait shows up when you are nearby
+    /// Determines things like whose portrait shows up when you are nearby
     /// </summary>
-    [FieldOffset(0x463c)]
+    [FieldOffset(0x463C)]
     public Player* Owner;
 
     /// <summary>
     /// The car's total damage, from 0-1.
     /// </summary>
-    [FieldOffset(0x6aa0)]
+    [FieldOffset(0x6AA0)]
     public float Damage;
 }
