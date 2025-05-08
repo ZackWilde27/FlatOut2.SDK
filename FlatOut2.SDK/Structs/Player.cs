@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Numerics;
 using FlatOut2.SDK.Enums;
 
 namespace FlatOut2.SDK.Structs;
@@ -23,7 +24,7 @@ public unsafe struct Player
     /// Pointer to car structure.
     /// </summary>
     [FieldOffset(0x33C)]
-    public void* Car;
+    public Car* Car;
     
     /// <summary>
     /// ID of the car.
@@ -54,12 +55,18 @@ public unsafe struct Player
     /// </summary>
     [FieldOffset(0x380)]
     public bool DisableControlAndReset;
-    
+
+    /// <summary>
+    /// Current location of the player's car (read only, and the Y component is always 0)
+    /// </summary>
+    [FieldOffset(0x428)]
+    public readonly Vector3 ReadOnlyPosition;
+
     /// <summary>
     /// Current damage (read only). 
     /// </summary>
     [FieldOffset(0x49C)]
-    public float ReadOnlyDamage;
+    public readonly float ReadOnlyDamage;
 
     /// <summary>
     /// Number of nudges in stunt mode.

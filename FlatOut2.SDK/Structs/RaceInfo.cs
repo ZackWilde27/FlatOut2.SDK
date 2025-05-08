@@ -10,7 +10,7 @@ namespace FlatOut2.SDK.Structs;
 public struct RaceInfo
 {
     /// <summary>
-    /// Poinnter to game's instance.
+    /// Pointer to game's instance.
     /// </summary>
     public static readonly unsafe RaceInfo** Instance = (RaceInfo**)0x8E8410;
     
@@ -28,6 +28,12 @@ public struct RaceInfo
     
     [FieldOffset(0x4AC)]
     public GameRules GameRules;
+
+    /// <summary>
+    /// The ID of the stunt being performed
+    /// </summary>
+    [FieldOffset(0x4B0)]
+    public StuntID StuntID;
     
     [FieldOffset(0x9B8)]
     public unsafe PlayerHost* HostObject;
@@ -37,4 +43,10 @@ public struct RaceInfo
     
     [FieldOffset(0xFE0)]
     public PlayerProfile PlayerProfile;
+
+    /// <summary>
+    /// The total distance driven in career mode
+    /// </summary>
+    [FieldOffset(0x1404)]
+    public float CareerOdometer;
 }
