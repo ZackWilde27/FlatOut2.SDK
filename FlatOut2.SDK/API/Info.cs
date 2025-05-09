@@ -3,7 +3,6 @@ using FlatOut2.SDK.Enums;
 using FlatOut2.SDK.Functions;
 using FlatOut2.SDK.Structs;
 using FlatOut2.SDK.Utilities;
-using Reloaded.Memory;
 using LiteDb = FlatOut2.SDK.Structs.LiteDb;
 
 namespace FlatOut2.SDK.API;

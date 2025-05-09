@@ -43,10 +43,4 @@ public struct RaceInfo
     
     [FieldOffset(0xFE0)]
     public PlayerProfile PlayerProfile;
-
-    /// <summary>
-    /// The total distance driven in career mode
-    /// </summary>
-    [FieldOffset(0x1404)]
-    public float CareerOdometer;
 }

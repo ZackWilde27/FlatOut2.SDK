@@ -3,6 +3,9 @@ using static FlatOut2.SDK.Functions.HelperFuncs;
 
 namespace FlatOut2.SDK.API;
 
+/// <summary>
+/// Contains nice-to-have functions that makes doing common things a lot easier
+/// </summary>
 public static class Helpers
 {
     private static VoidFunction? UserPerFrame = null;

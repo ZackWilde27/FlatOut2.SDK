@@ -7,7 +7,7 @@ namespace FlatOut2.SDK.Structs;
 /// Provides information about an individual vehicle.
 /// </summary>
 [StructLayout(LayoutKind.Explicit)]
-public unsafe struct Car
+public struct Car
 {
     /// <summary>
     /// The W component is not relevant, it's for padding
@@ -46,7 +46,7 @@ public unsafe struct Car
     /// Determines things like whose portrait shows up when you are nearby
     /// </summary>
     [FieldOffset(0x463C)]
-    public Player* Owner;
+    public unsafe Player* Owner;
 
     /// <summary>
     /// The car's total damage, from 0-1.
