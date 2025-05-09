@@ -258,41 +258,6 @@ public static class Info
         }
 
         /// <summary>
-        /// Just so it doesn't have to make a whole new array every time it returns empty
-        /// </summary>
-        private static readonly unsafe Player*[] EmptyPlayerArray = new Player*[0];
-
-        /// <summary>
-        /// Cached array of players to re-use if it hasn't changed
-        /// </summary>
-        private unsafe static Player*[] CachedPlayerArray = new Player*[1] { (Player*)0 };
-
-        /// <summary>
-        /// Converts the raw pointer from the HostObject to a C# array that can be foreach'd.
-        /// It caches the array to be more efficient when calling per frame
-        /// </summary>
-        /// <returns>An array of all currently active players</returns>
-        public static unsafe Player*[] GetPlayers()
-        {
-            var racePtr = *RaceInfo.Instance;
-            int numCars = Memory.Instance.Read<int>(0x0069D390);
-
-            if (racePtr != null && numCars > 0)
-            {
-                Player** ptr = racePtr->HostObject->Players;
-                if (ptr[0] != CachedPlayerArray[0])
-                {
-                    CachedPlayerArray = new Player*[numCars];
-
-                    for (int i = 0; i < numCars; i++)
-                        CachedPlayerArray[i] = ptr[i];
-                }
-                return CachedPlayerArray;
-            }
-            return EmptyPlayerArray;
-        }
-
-        /// <summary>
         /// Gets current in-game timer as TimeSpan.
         /// </summary>
         /// <returns></returns>
