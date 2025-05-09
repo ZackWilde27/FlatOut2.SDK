@@ -3,6 +3,7 @@ using FlatOut2.SDK.Enums;
 using FlatOut2.SDK.Functions;
 using FlatOut2.SDK.Structs;
 using FlatOut2.SDK.Utilities;
+using Reloaded.Memory;
 using LiteDb = FlatOut2.SDK.Structs.LiteDb;
 
 namespace FlatOut2.SDK.API;
@@ -257,11 +258,6 @@ public static class Info
         }
 
         /// <summary>
-        /// The array gets realloc'd each time, so it knows the list changed when the pointer moves
-        /// </summary>
-        private unsafe static Player** CachedPlayerArrayPtr = null;
-
-        /// <summary>
         /// Just so it doesn't have to make a whole new array every time it returns empty
         /// </summary>
         private static readonly unsafe Player*[] EmptyPlayerArray = new Player*[0];
@@ -269,28 +265,27 @@ public static class Info
         /// <summary>
         /// Cached array of players to re-use if it hasn't changed
         /// </summary>
-        private unsafe static Player*[] CachedPlayerArray = EmptyPlayerArray;
+        private unsafe static Player*[] CachedPlayerArray = new Player*[1] { (Player*)0 };
 
         /// <summary>
-        /// Helper function for converting the raw pointer to a C# array that can be foreach'd.
+        /// Converts the raw pointer from the HostObject to a C# array that can be foreach'd.
         /// It caches the array to be more efficient when calling per frame
         /// </summary>
         /// <returns>An array of all currently active players</returns>
         public static unsafe Player*[] GetPlayers()
         {
             var racePtr = *RaceInfo.Instance;
-            if (racePtr != null && racePtr->HostObject->NumCars > 0)
+            int numCars = Memory.Instance.Read<int>(0x0069D390);
+
+            if (racePtr != null && numCars > 0)
             {
                 Player** ptr = racePtr->HostObject->Players;
-                if (ptr != CachedPlayerArrayPtr)
+                if (ptr[0] != CachedPlayerArray[0])
                 {
-                    int numCars = racePtr->HostObject->NumCars;
                     CachedPlayerArray = new Player*[numCars];
 
                     for (int i = 0; i < numCars; i++)
                         CachedPlayerArray[i] = ptr[i];
-
-                    CachedPlayerArrayPtr = ptr;
                 }
                 return CachedPlayerArray;
             }
