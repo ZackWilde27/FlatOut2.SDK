@@ -2,7 +2,7 @@
 
 /// <summary>
 /// Boolean type that is word sized (4 bytes in FlatOut's case), used for maximum speed.
-/// It's set up to implicity convert between int and bool, so you can treat it like either one
+/// It's set up to implicitly convert between int and bool, so you can treat it like either one
 /// </summary>
 public struct BOOL
 {
@@ -12,7 +12,7 @@ public struct BOOL
     public static implicit operator int(BOOL val) => val.Value;
     public static implicit operator string(BOOL val) => val ? "TRUE" : "FALSE";
 
-    // I feel like if I have a constructor with this type, this implicit operator should be assumed.
+    // I feel like given the constructors, this implicit operator should be assumed.
     public static implicit operator BOOL(int val) => new(val);
     public static implicit operator BOOL(bool val) => new(val);
 

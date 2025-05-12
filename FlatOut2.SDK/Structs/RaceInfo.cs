@@ -36,7 +36,7 @@ public struct RaceInfo
     public GameRules GameRules;
 
     /// <summary>
-    /// The type of the stunt currently being performed
+    /// The type of stunt currently being performed
     /// </summary>
     [FieldOffset(0x4B0)]
     public StuntType StuntType;

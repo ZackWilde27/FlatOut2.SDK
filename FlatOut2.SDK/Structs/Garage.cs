@@ -36,6 +36,9 @@ public struct Garage
     [FieldOffset(0x8)]
     public int NumFunnyCars;
 
+    [FieldOffset(0xC)]
+    public unsafe byte* CarClass;
+
     /// <summary>
     /// The array is NumCars long
     /// </summary>

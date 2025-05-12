@@ -24,7 +24,7 @@ public unsafe struct PlayerHost
 
     /// <summary>
     /// Pointer to the end of the Players array, where the next player would go.
-    /// The length of the list can be calculated with (NextPlayers - Players) / 4
+    /// The length of the list can be calculated with (NextPlayer - Players) / 4
     /// </summary>
     [FieldOffset(0x18)]
     public Player** NextPlayer;
