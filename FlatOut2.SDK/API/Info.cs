@@ -337,6 +337,9 @@ public static class Info
         public static string GetCurrentGameStateString() => GetCurrentGameStateString(GetCurrentGameState());
     }
 
+    /// <summary>
+    /// Information about the player's profile
+    /// </summary>
     public static class Profile
     {
         /// <summary>
@@ -358,6 +361,9 @@ public static class Info
         }
     }
 
+    /// <summary>
+    /// Reads the state of the keyboard
+    /// </summary>
     public static class Controller
     {
         /// <summary>
@@ -378,7 +384,7 @@ public static class Info
         /// Returns whether or not a particular key is down
         /// </summary>
         /// <param name="key">The key to check for</param>
-        public static unsafe bool IsKeyHeld(KeyboardKeys key) => IsKeyHeld((byte)key);
+        public static bool IsKeyHeld(KeyboardKeys key) => IsKeyHeld((byte)key);
 
         /// <summary>
         /// Returns whether or not a particular key is down
@@ -391,7 +397,7 @@ public static class Info
         /// It keeps track of parity itself, which might not be accurate if it's been long enough since the last call
         /// </summary>
         /// <param name="key">The key to check for</param>
-        public static unsafe bool IsKeyPressed(KeyboardKeys key) => IsKeyPressed((byte)key);
+        public static bool IsKeyPressed(KeyboardKeys key) => IsKeyPressed((byte)key);
 
         /// <summary>
         /// Returns whether or not a particular key has just been pressed.
@@ -407,9 +413,9 @@ public static class Info
         }
 
         /// <summary>
-        /// Checks if any keys are currently held down
+        /// true if any keys are currently held down
         /// </summary>
-        public static unsafe bool AnyKeysDown()
+        public static bool AnyKeysDown()
         {
             for (int i = 0; i < 256; i++)
             {
@@ -420,9 +426,9 @@ public static class Info
         }
 
         /// <summary>
-        /// Checks if any keys have just been pressed
+        /// true if any keys have just been pressed
         /// </summary>
-        public static unsafe bool AnyKeysPressed()
+        public static bool AnyKeysPressed()
         {
             for (int i = 0; i < 256; i++)
             {

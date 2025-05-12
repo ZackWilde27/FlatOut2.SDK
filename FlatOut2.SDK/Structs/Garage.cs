@@ -24,6 +24,9 @@ public struct CarDatabaseItem
     public int MoneySpentOnUpgrades;
 }
 
+/// <summary>
+/// Stores information about every car in the game, like whether or not you've unlocked it, or bought it
+/// </summary>
 [StructLayout(LayoutKind.Explicit)]
 public struct Garage
 {
@@ -33,15 +36,9 @@ public struct Garage
     [FieldOffset(0x8)]
     public int NumFunnyCars;
 
-    [FieldOffset(0xC)]
-    public unsafe byte* CarClasses;
-
     /// <summary>
-    /// Array of CarDatabaseItems that is NumCars long
+    /// The array is NumCars long
     /// </summary>
     [FieldOffset(0x54)]
     public unsafe CarDatabaseItem* Database;
-
-    [FieldOffset(0x64)]
-    public int CarsOwned;
 }

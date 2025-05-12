@@ -30,18 +30,6 @@ public unsafe struct PlayerProfile
     [FieldOffset(0xE5E)]
     public byte CareerCar;
 
-    /// <summary>
-    /// The index of the active cup in the current car class
-    /// </summary>
-    [FieldOffset(0xE60)]
-    public byte ActiveEvent;
-
-    [FieldOffset(0xED6)]
-    public byte PreviousRaceClass;
-
-    [FieldOffset(0xED8)]
-    public byte PreviousRaceIndex;
-
     [FieldOffset(0xEDC)]
     public BOOL IsAutosaveEnabled;
 
@@ -68,7 +56,4 @@ public unsafe struct PlayerProfile
 
     [FieldOffset(0xF1C)]
     public float TotalRagdollFlyDistance;
-
-    [FieldOffset(0x1088)]
-    public byte* LevelPositions;
 }
