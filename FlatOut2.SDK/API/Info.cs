@@ -378,7 +378,7 @@ public static class Info
         /// <summary>
         /// Stores the previous key parity to check for new presses
         /// </summary>
-        private static readonly bool[] ParityArray = new bool[256];
+        private static readonly byte[] ParityArray = new byte[256];
 
         /// <summary>
         /// Returns whether or not a particular key is down
@@ -406,7 +406,7 @@ public static class Info
         /// <param name="index">Index into the KeyState array</param>
         public static unsafe bool IsKeyPressed(byte index)
         {
-            bool parity = ((KeyState[index] & 0x1) != 0);
+            byte parity = (byte)(KeyState[index] & 1);
             bool pressed = IsKeyHeld(index) && parity != ParityArray[index];
             ParityArray[index] = parity;
             return pressed;
@@ -432,7 +432,7 @@ public static class Info
         {
             for (int i = 0; i < 256; i++)
             {
-                if (IsKeyPressed((KeyboardKeys)i))
+                if (IsKeyPressed((byte)i))
                     return true;
             }
             return false;
