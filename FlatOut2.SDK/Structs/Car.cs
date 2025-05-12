@@ -40,7 +40,7 @@ public struct Car
     /// 1 if ragdolled, otherwise 0
     /// </summary>
     [FieldOffset(0x2AB0)]
-    public int RagdollState;
+    public BOOL RagdollState;
 
     /// <summary>
     /// Determines things like whose portrait shows up when you are nearby

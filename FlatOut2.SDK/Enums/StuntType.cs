@@ -3,7 +3,7 @@
 /// <summary>
 /// An ID describing which stunt is being played.
 /// </summary>
-public enum StuntID
+public enum StuntType
 {
     None,
     Curling,

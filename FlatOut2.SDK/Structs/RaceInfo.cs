@@ -19,6 +19,12 @@ public struct RaceInfo
     
     [FieldOffset(0x464)]
     public GameMode GameMode;
+
+    /// <summary>
+    /// Overrides the derby type when loading into a map, unless it's DerbyType.None
+    /// </summary>
+    [FieldOffset(0x46C)]
+    public DerbyType DerbyTypeOverride;
     
     [FieldOffset(0x480)]
     public int LevelId;
@@ -30,11 +36,23 @@ public struct RaceInfo
     public GameRules GameRules;
 
     /// <summary>
-    /// The ID of the stunt being performed
+    /// The type of the stunt being performed
     /// </summary>
     [FieldOffset(0x4B0)]
-    public StuntID StuntID;
-    
+    public StuntType StuntType;
+
+    /// <summary>
+    /// The type of derby currently being played
+    /// </summary>
+    [FieldOffset(0x4B4)]
+    public DerbyType DerbyType;
+
+    /// <summary>
+    /// 1 if nitro refills over time, otherwise 0
+    /// </summary>
+    [FieldOffset(0x4BC)]
+    public int NitroRegen;
+
     [FieldOffset(0x9B8)]
     public unsafe PlayerHost* HostObject;
     

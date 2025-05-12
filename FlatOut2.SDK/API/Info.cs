@@ -233,6 +233,37 @@ public static class Info
         public static string GetCurrentGameModeStr() => GetCurrentGameModeStr(GetCurrentGameMode());
 
         /// <summary>
+        /// Gets the ID of the stunt being performed
+        /// </summary>
+        public static unsafe StuntType GetCurrentStuntType()
+        {
+            var racePtr = *RaceInfo.Instance;
+            return racePtr == null ? StuntType.None : racePtr->StuntType;
+        }
+
+        /// <summary>
+        /// Gets the current stunt type as a user-friendly string with spaces
+        /// </summary>
+        public static string GetCurrentStuntTypeStr(StuntType stunt)
+        {
+            return stunt switch
+            {
+                StuntType.BlackDanny => "Royal Flush",
+                StuntType.FieldGoal => "Field Goal",
+                StuntType.HighJump => "High Jump",
+                StuntType.RingOfFire => "Ring Of Fire",
+                StuntType.SkiJump => "Ski Jump",
+                StuntType.StoneSkipping => "Stone Skipping",
+                _ => stunt.ToString()
+            };
+        }
+
+        /// <summary>
+        /// Gets the current stunt type as a user-friendly string with spaces
+        /// </summary>
+        public static string GetCurrentStuntTypeStr() => GetCurrentStuntTypeStr(GetCurrentStuntType());
+
+        /// <summary>
         /// True if game is currently paused.
         /// </summary>
         public static unsafe bool IsPaused()
@@ -304,5 +335,101 @@ public static class Info
         /// Gets the name of the current game state as a string.
         /// </summary>
         public static string GetCurrentGameStateString() => GetCurrentGameStateString(GetCurrentGameState());
+    }
+
+    public static class Profile
+    {
+        /// <summary>
+        /// Returns whether or not autosave is enabled (I don't think there's a way to turn it off, so it's always true)
+        /// </summary>
+        public static unsafe bool IsAutosaveEnabled()
+        {
+            var racePtr = *RaceInfo.Instance;
+            return racePtr == null ? false : racePtr->PlayerProfile.IsAutosaveEnabled;
+        }
+
+        /// <summary>
+        /// Gets the current profile's slot number
+        /// </summary>
+        public static unsafe int GetAutosaveSlot()
+        {
+            var racePtr = *RaceInfo.Instance;
+            return racePtr == null ? -1 : racePtr->PlayerProfile.AutosaveSlot;
+        }
+    }
+
+    public static class Controller
+    {
+        /// <summary>
+        /// Pointer to the global key state array.
+        /// It's an array of bytes, 256 large.
+        /// </summary>
+        // In binary it can be thought of like D--- ---P
+        // Where D is whether or not the key is currently down
+        // P is parity, it swaps between 0 and 1 each time you press the key
+        private static readonly unsafe byte* KeyState = (byte*)0x008D7E60;
+
+        /// <summary>
+        /// Stores the previous key parity to check for new presses
+        /// </summary>
+        private static readonly bool[] ParityArray = new bool[256];
+
+        /// <summary>
+        /// Returns whether or not a particular key is down
+        /// </summary>
+        /// <param name="key">The key to check for</param>
+        public static unsafe bool IsKeyHeld(KeyboardKeys key) => IsKeyHeld((byte)key);
+
+        /// <summary>
+        /// Returns whether or not a particular key is down
+        /// </summary>
+        /// <param name="index">Index into the KeyState array</param>
+        public static unsafe bool IsKeyHeld(byte index) => (KeyState[index] & 0x80) != 0;
+
+        /// <summary>
+        /// Returns whether or not a particular key has just been pressed.
+        /// It keeps track of parity itself, which might not be accurate if it's been long enough since the last call
+        /// </summary>
+        /// <param name="key">The key to check for</param>
+        public static unsafe bool IsKeyPressed(KeyboardKeys key) => IsKeyPressed((byte)key);
+
+        /// <summary>
+        /// Returns whether or not a particular key has just been pressed.
+        /// It keeps track of parity itself, which might not be accurate if it's been long enough since the last call
+        /// </summary>
+        /// <param name="index">Index into the KeyState array</param>
+        public static unsafe bool IsKeyPressed(byte index)
+        {
+            bool parity = ((KeyState[index] & 0x1) != 0);
+            bool pressed = IsKeyHeld(index) && parity != ParityArray[index];
+            ParityArray[index] = parity;
+            return pressed;
+        }
+
+        /// <summary>
+        /// Checks if any keys are currently held down
+        /// </summary>
+        public static unsafe bool AnyKeysDown()
+        {
+            for (int i = 0; i < 256; i++)
+            {
+                if (IsKeyHeld((byte)i))
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if any keys have just been pressed
+        /// </summary>
+        public static unsafe bool AnyKeysPressed()
+        {
+            for (int i = 0; i < 256; i++)
+            {
+                if (IsKeyPressed((KeyboardKeys)i))
+                    return true;
+            }
+            return false;
+        }
     }
 }

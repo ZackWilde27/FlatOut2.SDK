@@ -8,6 +8,8 @@ namespace FlatOut2.SDK.Structs;
 [StructLayout(LayoutKind.Explicit)]
 public unsafe struct PlayerHost
 {
+    public static readonly PlayerHost** Instance = (PlayerHost**)0x00696DC8;
+
     /// <summary>
     /// 0x674C10 in MP, 0x66D890 in SP
     /// </summary>
@@ -19,6 +21,9 @@ public unsafe struct PlayerHost
     /// </summary>
     [FieldOffset(0x14)]
     public Player** Players;
+
+    [FieldOffset(0x18)]
+    public Player** LastPlayer;
     
     [FieldOffset(0x20)]
     public Player** LocalPlayer;
@@ -37,6 +42,12 @@ public unsafe struct PlayerHost
     /// </summary>
     [FieldOffset(0x2087c)]
     public int Timer;
+
+    /// <summary>
+    /// 1 if currently playing in party mode or online, otherwise 0
+    /// </summary>
+    [FieldOffset(0x208A0)]
+    public BOOL IsMultiplayer;
     
     /// <summary>
     /// Returns the timer as a TimeSpan.
