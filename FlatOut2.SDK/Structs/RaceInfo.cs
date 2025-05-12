@@ -36,7 +36,7 @@ public struct RaceInfo
     public GameRules GameRules;
 
     /// <summary>
-    /// The type of the stunt being performed
+    /// The type of the stunt currently being performed
     /// </summary>
     [FieldOffset(0x4B0)]
     public StuntType StuntType;
@@ -47,11 +47,8 @@ public struct RaceInfo
     [FieldOffset(0x4B4)]
     public DerbyType DerbyType;
 
-    /// <summary>
-    /// 1 if nitro refills over time, otherwise 0
-    /// </summary>
     [FieldOffset(0x4BC)]
-    public int NitroRegen;
+    public BOOL NitroRegen;
 
     [FieldOffset(0x9B8)]
     public unsafe PlayerHost* HostObject;

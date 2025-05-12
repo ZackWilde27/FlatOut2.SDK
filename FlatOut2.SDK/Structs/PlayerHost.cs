@@ -22,8 +22,12 @@ public unsafe struct PlayerHost
     [FieldOffset(0x14)]
     public Player** Players;
 
+    /// <summary>
+    /// Pointer to the end of the Players array, where the next player would go.
+    /// The length of the list can be calculated with (NextPlayers - Players) / 4
+    /// </summary>
     [FieldOffset(0x18)]
-    public Player** LastPlayer;
+    public Player** NextPlayer;
     
     [FieldOffset(0x20)]
     public Player** LocalPlayer;
@@ -43,9 +47,6 @@ public unsafe struct PlayerHost
     [FieldOffset(0x2087c)]
     public int Timer;
 
-    /// <summary>
-    /// 1 if currently playing in party mode or online, otherwise 0
-    /// </summary>
     [FieldOffset(0x208A0)]
     public BOOL IsMultiplayer;
     

@@ -12,7 +12,7 @@ public enum DerbyType
     None,
 
     /// <summary>
-    /// Same as Wrecking, except when you win, you are labelled as 'Survived' on the leaderboard
+    /// Same as Wrecking, except when you win, you are labelled as 'Survived' on the results page
     /// </summary>
     LastManStanding,
 
