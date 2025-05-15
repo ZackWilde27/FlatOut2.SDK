@@ -23,23 +23,21 @@ public static unsafe class CheatCodeManager
     /// <summary>
     /// The replacement function for checking cheat codes
     /// </summary>
-    /// <param name="codePtr">The pointer to the entered code</param>
+    /// <param name="code">The entered code</param>
     /// <param name="profile">Pointer to the current profile</param>
-    /// <returns>1 if the cheat was valid, otherwise 0</returns>
-    private static int NewCheckForCheatCodes(char* codePtr, PlayerProfile* profile)
+    /// <returns>Whether or not the cheat was valid</returns>
+    private static BOOL NewCheckForCheatCodes(string code, PlayerProfile* profile)
     {
-        string code = Marshal.PtrToStringUni((nint)codePtr)!;
-
         foreach (var cheat in NewCheats)
         {
             if (cheat.Code == code)
             {
                 cheat.OnActivation(profile);
-                return 1;
+                return true;
             }
         }
 
-        return CheatCodeHook!.OriginalFunction(codePtr, profile);
+        return CheatCodeHook!.OriginalFunction(code, profile);
     }
 
     /// <summary>

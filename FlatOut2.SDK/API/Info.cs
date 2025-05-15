@@ -413,7 +413,7 @@ public static class Info
         }
 
         /// <summary>
-        /// true if any keys are currently held down
+        /// True if any keys are currently held down
         /// </summary>
         public static bool AnyKeysDown()
         {
@@ -426,7 +426,7 @@ public static class Info
         }
 
         /// <summary>
-        /// true if any keys have just been pressed
+        /// True if any keys have just been pressed
         /// </summary>
         public static bool AnyKeysPressed()
         {
