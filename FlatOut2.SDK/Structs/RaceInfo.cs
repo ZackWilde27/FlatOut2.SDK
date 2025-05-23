@@ -47,6 +47,9 @@ public struct RaceInfo
     [FieldOffset(0x4B4)]
     public DerbyType DerbyType;
 
+    /// <summary>
+    /// Whether or not nitro refills over time. (read only, at least during the race)
+    /// </summary>
     [FieldOffset(0x4BC)]
     public BOOL NitroRegen;
 

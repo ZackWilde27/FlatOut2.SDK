@@ -31,7 +31,7 @@ public unsafe struct PlayerProfile
     public byte CareerCar;
 
     [FieldOffset(0xEDC)]
-    public BOOL IsAutosaveEnabled;
+    public BOOL AutosaveEnabled;
 
     /// <summary>
     /// The profile's number - 1
@@ -40,20 +40,26 @@ public unsafe struct PlayerProfile
     public int AutosaveSlot;
 
     /// <summary>
-    /// Total money spent on cars in career mode
+    /// Total amount of money spent on cars in career mode
     /// </summary>
     [FieldOffset(0xEF8)]
     public int MoneySpentCars;
 
     /// <summary>
-    /// Total money spent on upgrades in career mode
+    /// Total amount of money spent on upgrades in career mode
     /// </summary>
     [FieldOffset(0xEFC)]
     public int MoneySpentUpgrades;
 
+    /// <summary>
+    /// In careeer mode specifically
+    /// </summary>
     [FieldOffset(0xF18)]
     public int NumTimesRagdolled;
 
+    /// <summary>
+    /// In careeer mode specifically
+    /// </summary>
     [FieldOffset(0xF1C)]
     public float TotalRagdollFlyDistance;
 }

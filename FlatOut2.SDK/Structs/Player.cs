@@ -54,7 +54,7 @@ public unsafe struct Player
     /// set to 1 when ragdolled, instantly fades out and resets car, doesnt reset if 0x4A8 is 0.
     /// </summary>
     [FieldOffset(0x380)]
-    public bool DisableControlAndReset;
+    public BOOL DisableControlAndReset;
 
     /// <summary>
     /// Current location of the player's car (read only, and the Y component is always 0)

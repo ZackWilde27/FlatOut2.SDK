@@ -3,6 +3,7 @@ using FlatOut2.SDK.Enums;
 using FlatOut2.SDK.Functions;
 using FlatOut2.SDK.Structs;
 using FlatOut2.SDK.Utilities;
+using Reloaded.Memory;
 using LiteDb = FlatOut2.SDK.Structs.LiteDb;
 
 namespace FlatOut2.SDK.API;
@@ -302,6 +303,18 @@ public static class Info
 
             return racePtr->HostObject->TimerAsTimeSpan;
         }
+
+        /// <summary>
+        /// Converts the pointer from the PlayerHost to a C# span that can be foreach'd.
+        /// </summary>
+        public static unsafe Span<nint> GetPlayers()
+        {
+            var hostObject = *PlayerHost.Instance;
+            if (hostObject != null)
+                return new(hostObject->Players, Memory.Instance.Read<int>(0x0069D390));
+
+            return new();
+        }
     }
     
     /// <summary>
@@ -348,7 +361,7 @@ public static class Info
         public static unsafe bool IsAutosaveEnabled()
         {
             var racePtr = *RaceInfo.Instance;
-            return racePtr == null ? false : racePtr->PlayerProfile.IsAutosaveEnabled;
+            return racePtr == null ? false : racePtr->PlayerProfile.AutosaveEnabled;
         }
 
         /// <summary>

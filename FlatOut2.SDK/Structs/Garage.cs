@@ -6,19 +6,19 @@ namespace FlatOut2.SDK.Structs;
 public struct CarDatabaseItem
 {
     /// <summary>
-    /// if 0, you will be able to pick the car in normal race modes
+    /// Whether or not the car is hidden when choosing one
     /// </summary>
     [FieldOffset(0x0)]
     public BOOL IsLocked;
 
     /// <summary>
-    /// 1 if you own the car in career mode, otherwise 0
+    /// Whether or not you own the car in career mode
     /// </summary>
     [FieldOffset(0x4)]
     public BOOL IsOwned;
 
     /// <summary>
-    /// Total amount of money spent on upgrades for this car
+    /// Total amount spent on upgrades for this car in career mode.
     /// </summary>
     [FieldOffset(0x1C)]
     public int MoneySpentOnUpgrades;
