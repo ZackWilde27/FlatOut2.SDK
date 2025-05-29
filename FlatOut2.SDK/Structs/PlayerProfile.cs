@@ -12,12 +12,6 @@ public unsafe struct PlayerProfile
     [FieldOffset(0x3C4)]
     public Garage Garage;
 
-    /// <summary>
-    /// The total distance driven in career mode
-    /// </summary>
-    [FieldOffset(0x424)]
-    public float CareerOdometer;
-
     [FieldOffset(0xE34)]
     public fixed byte ProfileName[16];
     

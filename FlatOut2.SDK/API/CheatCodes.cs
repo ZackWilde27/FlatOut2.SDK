@@ -1,6 +1,5 @@
 ﻿using FlatOut2.SDK.Structs;
 using Reloaded.Hooks.Definitions;
-using System.Runtime.InteropServices;
 using static FlatOut2.SDK.Functions.CheatCodeFuncs;
 
 namespace FlatOut2.SDK.API;

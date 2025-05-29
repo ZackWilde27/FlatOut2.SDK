@@ -44,4 +44,10 @@ public struct Garage
     /// </summary>
     [FieldOffset(0x54)]
     public unsafe CarDatabaseItem* Database;
+
+    /// <summary>
+    /// The total distance driven in career mode
+    /// </summary>
+    [FieldOffset(0x60)]
+    public float CareerOdometer;
 }
