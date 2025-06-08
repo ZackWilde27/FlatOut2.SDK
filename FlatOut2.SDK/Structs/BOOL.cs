@@ -12,7 +12,7 @@ public struct BOOL
     public static implicit operator int(BOOL val) => val.Value;
     public static implicit operator string(BOOL val) => val ? "TRUE" : "FALSE";
 
-    // I feel like given the constructors, this implicit operator should be assumed.
+    // I feel like given the constructors, these implicit operators should be assumed. -zw
     public static implicit operator BOOL(int val) => new(val);
     public static implicit operator BOOL(bool val) => new(val);
 
