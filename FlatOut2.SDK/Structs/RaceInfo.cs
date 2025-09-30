@@ -21,6 +21,12 @@ public struct RaceInfo
     public GameMode GameMode;
 
     /// <summary>
+    /// Overrides the game rules when loading into a map, unless it's GameRules.Default
+    /// </summary>
+    [FieldOffset(0x468)]
+    public GameRules GameRulesOverride;
+
+    /// <summary>
     /// Overrides the derby type when loading into a map, unless it's DerbyType.None
     /// </summary>
     [FieldOffset(0x46C)]

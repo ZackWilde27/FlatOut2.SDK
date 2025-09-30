@@ -16,7 +16,6 @@ public static class HelperFuncs
     /// <param name="pEnvironment">Pointer to the BVISUAL::Environment struct</param>
     /// <param name="param_2">Unknown</param>
     [Function(new Register[] { Register.eax }, Register.eax, StackCleanup.Callee)]
-    [UnmanagedFunctionPointer(CallingConvention.StdCall, CharSet = CharSet.Ansi)]
     public unsafe delegate void RenderSkyPtr(int in_EAX, void* pEnvironment, int param_2);
 
     /// <summary>

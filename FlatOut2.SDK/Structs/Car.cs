@@ -9,11 +9,14 @@ namespace FlatOut2.SDK.Structs;
 [StructLayout(LayoutKind.Explicit)]
 public struct Car
 {
+    [FieldOffset(0x1B0)]
+    public Matrix4x4 WorldMatrix;
+
     /// <summary>
-    /// The W component is not relevant, it's for padding
+    /// The position is just the 4th row of the WorldMatrix
     /// </summary>
     [FieldOffset(0x1E0)]
-    public Vector4 Position;
+    public Vector3 Position;
 
     [FieldOffset(0x270)]
     public Quaternion Rotation;
