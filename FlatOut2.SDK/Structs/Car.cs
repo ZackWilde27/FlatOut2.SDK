@@ -21,17 +21,11 @@ public struct Car
     [FieldOffset(0x270)]
     public Quaternion Rotation;
 
-    /// <summary>
-    /// The W component is not relevant, it's for padding
-    /// </summary>
     [FieldOffset(0x280)]
-    public Vector4 Velocity;
+    public Vector3 Velocity;
 
-    /// <summary>
-    /// The W component is not relevant, it's for padding
-    /// </summary>
     [FieldOffset(0x290)]
-    public Vector4 RotationalVelocity;
+    public Vector3 RotationalVelocity;
 
     /// <summary>
     /// The current level of nitro, from 0-5
@@ -56,4 +50,9 @@ public struct Car
     /// </summary>
     [FieldOffset(0x6AA0)]
     public float Damage;
+
+    public readonly bool IsWrecked()
+    {
+        return Damage >= 1.0;
+    }
 }
